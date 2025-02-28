@@ -1,3 +1,4 @@
+# Libraries
 from flask import Flask, render_template, request
 from http import HTTPStatus
 import json
@@ -7,12 +8,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) # Warning: this disables CORS policy
 
-### Endpoints
-
-# This is a JSON implementation
-@app.get("/test")
-def test():
-    return "This is another endpoint", 200
+##############################################
+################ ENDPOINTS ################
+##############################################
 
 # Home page
 @app.get("/")
@@ -24,12 +22,6 @@ def home():
 def about():
     return "<h1>This is the about page</h1>", HTTPStatus.OK
 
-# @app.post("/")
-# @app.put("/")
-# @app.patch("/")
-# @app.delete("/")
-# if I don't have some method, than means that method is not valid
-
 # About me page
 @app.get("/about-me")
 def about_me():
@@ -37,7 +29,9 @@ def about_me():
     user_name = "Chris"
     return render_template("about-me.html", name = user_name)
 
-products = []
+##############################################
+################ CATALOG ################
+##############################################
 
 # Fix the id from MongoDB
 def fix_id(obj):
@@ -57,52 +51,12 @@ def get_products():
 @app.post("/api/catalog")
 def save_product():
     product = request.get_json()
-    print(f"product {product}")
-    # products.append(product)
     db.catalog.insert_one(product)
     return "Product saved", 201
-
-# PUT
-@app.put("/api/products/<int:index>")
-def update_product(index):
-    updated_product = request.get_json()
-    print(f"Update {index} with {updated_product}")
-
-    if 0 <= index < len(products):
-        products[index] = updated_product
-        return json.dumps(updated_product), HTTPStatus.OK
-    else:
-        return "Product not found", HTTPStatus.NOT_FOUND
-
-# DELETE
-@app.delete("/api/products/<int:index>")
-def delete_product(index):
-    print(f"Delete {index}")
-
-    if index >= 0 and index < len(products):
-        # deletect_product = products.pop(index)
-        # return json.dumps(deletect_product), HTTPStatus.OK
-        db.products.delete_one({"_id": products[index]["_id"]})
-    else:
-        return "Product not found", HTTPStatus.NOT_FOUND
-    
-# Count the number of products
-@app.get("/api/products/count")
-def count_products():
-    product_count = db.products.count_documents({})
-    return json.dumps({"total": product_count}), HTTPStatus.OK
 
 ##############################################
 ################ COUPON CODES ################
 ##############################################
-
-# POST
-@app.post("/api/coupons")
-def save_coupon():
-    coupon = request.get_json()
-    print(f"Coupon: {coupon}")
-    db.coupons.insert_one(coupon)
-    return "Coupon saved", 201
 
 # GET
 @app.get("/api/coupons")
@@ -113,4 +67,12 @@ def get_coupons():
         coupons_db.append(fix_id(coupon))
     return json.dumps(coupons_db), HTTPStatus.OK
 
+# POST
+@app.post("/api/coupons")
+def save_coupon():
+    coupon = request.get_json()
+    db.coupons.insert_one(coupon)
+    return "Coupon saved", 201
+
+# Run the server
 app.run(debug = True)
