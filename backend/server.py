@@ -47,6 +47,33 @@ def get_products():
         products_db.append(fix_id(product))
     return json.dumps(products_db), HTTPStatus.OK
 
+# GET by category
+@app.get("/api/catalog/category/<string:category>")
+def get_products_category(category):
+    products_db = []
+    cursor = db.catalog.find({"category": category})
+    for product in cursor:
+        products_db.append(fix_id(product))
+    return json.dumps(products_db), HTTPStatus.OK
+
+# GET by price
+@app.get("/api/catalog/price/<float:price>")
+def get_catalog_price(price):
+    products_db = []
+    cursor = db.catalog.find({"price": price})
+    for product in cursor:
+        products_db.append(fix_id(product))
+    return json.dumps(products_db), HTTPStatus.OK
+
+# GET by title
+@app.get("/api/catalog/title/<string:title>")
+def get_catalog_title(title):
+    products_db = []
+    cursor = db.catalog.find({"title": title})
+    for product in cursor:
+        products_db.append(fix_id(product))
+    return json.dumps(products_db), HTTPStatus.OK
+
 # POST
 @app.post("/api/catalog")
 def save_product():
@@ -63,6 +90,15 @@ def save_product():
 def get_coupons():
     coupons_db = []
     cursor = db.coupons.find({})
+    for coupon in cursor:
+        coupons_db.append(fix_id(coupon))
+    return json.dumps(coupons_db), HTTPStatus.OK
+
+# GET by code
+@app.get("/api/coupons/code/<string:code>")
+def get_coupons_code(code):
+    coupons_db = []
+    cursor = db.coupons.find({"code": code})
     for coupon in cursor:
         coupons_db.append(fix_id(coupon))
     return json.dumps(coupons_db), HTTPStatus.OK
