@@ -1,0 +1,45 @@
+.admin {
+    padding-top: 10px;
+    margin-bottom: 100px;
+}
+
+.admin h1 {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.admin .register,
+.admin .coupons {
+    border: 1px solid #666;
+    border-radius: 4px;
+    background-color: white;
+    text-align: left;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.admin .register div,
+.admin .coupons div {
+    margin-bottom: 15px;
+}
+
+.admin h3 {
+    text-align: center;
+}
+
+.admin label {
+    margin-top: 10px;
+}
+
+/* .admin-container {
+    display: flex;
+} */
+
+/* .admin .register {
+    flex: 50;
+}
+
+.admin .coupons {
+    flex: 30;
+} */

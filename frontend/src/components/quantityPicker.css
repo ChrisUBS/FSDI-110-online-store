@@ -1,0 +1,16 @@
+.quantity-picker button{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.quantity-picker label {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .quantity-picker button {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+}

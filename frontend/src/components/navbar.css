@@ -1,0 +1,40 @@
+/* Navbar customization */
+.navbar-brand {
+    font-size: 24px;
+    letter-spacing: 1px;
+    transition: transform 0.3s;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.1);
+}
+
+.nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-link:hover {
+    background-color: #155724;
+    color: #ffcc00;
+    border-radius: 5px;
+    transform: translateY(-2px);
+}
+
+/* .navbar {
+    animation: neon 1s ease infinite;
+} */
+
+@keyframes neon {
+    0%,
+    100% {
+        text-shadow: 0 0 10px #00a2ff, 0 0 20px #00a2ff, 0 0 20px #00a2ff, 0 0 20px #00a2ff, 0 0 2px #33ccff, 2px 2px 2px #1a3d66;
+        color: #cceeff;
+    }
+    50% {
+        text-shadow: 0 0 2px #003366, 0 0 5px #003366, 0 0 5px #003366, 0 0 5px #003366, 0 0 2px #0066cc, 4px 4px 2px #002244;
+        color: #99d6ff;
+    }
+}
