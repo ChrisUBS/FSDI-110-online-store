@@ -47,6 +47,18 @@ def get_products():
         products_db.append(fix_id(product))
     return json.dumps(products_db), HTTPStatus.OK
 
+# GET all categories
+@app.get("/api/catalog/categories")
+def get_categories():
+    categories_db = set()  # Set to automatically avoid duplicates
+    cursor = db.catalog.find({}, {"category": 1, "_id": 0})
+
+    for product in cursor:
+        if "category" in product:
+            categories_db.add(product["category"])
+
+    return json.dumps(sorted(list(categories_db))), HTTPStatus.OK
+
 # GET by category
 @app.get("/api/catalog/category/<string:category>")
 def get_products_category(category):
