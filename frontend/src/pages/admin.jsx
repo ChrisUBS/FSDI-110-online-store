@@ -19,6 +19,22 @@ function Admin() {
         category: ''
     });
 
+    function resetFieldsProduct() {
+        setProduct({
+            title: '',
+            price: '',
+            image: '',
+            category: ''
+        });
+    }
+
+    function resetFieldsCoupon() {
+        setCoupon({
+            code: '',
+            discount: ''
+        });
+    }
+    
     function handleProduct(e) {
         const text = e.target.value;
         const name = e.target.name;
@@ -46,6 +62,7 @@ function Admin() {
         copy.push(product);
         setAllProducts(copy);
         console.log('All Products:', allProducts);
+        resetFieldsProduct();
     }
 
     function handleCoupon(e) {
@@ -82,6 +99,7 @@ function Admin() {
         copy.push(coupon);
         setAllCoupons(copy);
         console.log('All Coupons:', allCoupons);
+        resetFieldsCoupon();
     }
 
     useEffect(() => {
@@ -99,19 +117,19 @@ function Admin() {
                     <form>
                         <div className="form-group">
                             <label htmlFor="product-name">Product name</label>
-                            <input type="text" className="form-control" id="product-name" placeholder="Enter product name" onBlur={handleProduct} name='title' />
+                            <input type="text" className="form-control" id="product-name" placeholder="Enter product name" onChange={handleProduct} name='title' value={product.title}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="product-price">Product price</label>
-                            <input type="number" className="form-control" id="product-price" placeholder="Enter product price" onBlur={handleProduct} name='price' />
+                            <input type="number" className="form-control" id="product-price" placeholder="Enter product price" onChange={handleProduct} name='price' value={product.price}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="product-image">Product image</label>
-                            <input type="text" className="form-control" id="product-image" placeholder="Enter product image" onBlur={handleProduct} name='image' />
+                            <input type="text" className="form-control" id="product-image" placeholder="Enter product image" onChange={handleProduct} name='image' value={product.image}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="product-category">Product category</label>
-                            <input type="text" className="form-control" id="product-category" placeholder="Enter product category" onBlur={handleProduct} name='category' />
+                            <input type="text" className="form-control" id="product-category" placeholder="Enter product category" onChange={handleProduct} name='category' value={product.category}/>
                         </div>
 
                     </form>
@@ -128,12 +146,12 @@ function Admin() {
                     <form>
                         <div className="form-group">
                             <label htmlFor="code">Code</label>
-                            <input type="text" className="form-control" id="code" placeholder="Enter code" onBlur={handleCoupon} name='code' />
+                            <input type="text" className="form-control" id="coupon-code" placeholder="Enter code" onChange={handleCoupon} name='code' value={coupon.code}/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="discount">Discount</label>
-                            <input type="number" className="form-control" id="discount" placeholder="Enter discount" onBlur={handleCoupon} name='discount' />
+                            <input type="number" className="form-control" id="coupon-discount" placeholder="Enter discount" onChange={handleCoupon} name='discount' value={coupon.discount}/>
                         </div>
 
                     </form>
