@@ -4,6 +4,7 @@ from http import HTTPStatus
 import json
 from config import db
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app) # Warning: this disables CORS policy
@@ -123,4 +124,6 @@ def save_coupon():
     return "Coupon saved", 201
 
 # Run the server
-app.run(debug = True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
